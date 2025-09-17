@@ -10,9 +10,9 @@ constexpr std::time_t INVALID_TIME = -1;
 struct NowTime
 {
     using system_clock = std::chrono::system_clock;
-    system_clock::time_point tp;
-    std::time_t tt;
-    std::tm tm;
+    system_clock::time_point tp_;
+    std::time_t tt_;
+    std::tm tm_;
 
     NowTime() noexcept;
     ~NowTime() = default;
@@ -20,16 +20,16 @@ struct NowTime
 
 struct Time
 {
+    using time_point = std::chrono::system_clock::time_point;
     using system_clock = std::chrono::system_clock;
-    std::istringstream iss;
-    system_clock::time_point tp;
-    std::time_t tt;
-    std::tm tm{};
+    std::istringstream iss_;
+    std::time_t tt_;
+    time_point tp_;
+    std::tm tm_{};
 
     Time() = default;
 
-    //  [[nodiscard]]
-    void time_format(const std::string &st);
+    [[nodiscard]] time_point time_format(const std::string &st);
 
     void clear() noexcept;
 };
@@ -37,5 +37,5 @@ struct Time
 struct Compare
 {
     using event_ptr = std::shared_ptr<Event>;
-    bool operator()(const event_ptr &a, const event_ptr &b) const; // Is it can be noexcept
+    bool operator()(const event_ptr &a_, const event_ptr &b_) const noexcept;
 };

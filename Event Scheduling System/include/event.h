@@ -1,7 +1,17 @@
 #pragma once
 // event.h
-#include <iostream>
+#include "utils.h"
 #include <chrono>
+
+struct EventInfo
+{
+    using system_clock = std::chrono::system_clock;
+
+    std::string title_;
+    std::string location_;
+    std::string description_;
+    system_clock::time_point time_;
+};
 
 class Event
 {
@@ -9,13 +19,11 @@ public:
     using time_point = std::chrono::system_clock::time_point;
 
 public:
-    Event(const std::string &title, const time_point &tp) noexcept
-        : title_(title), event_time_(tp) {}
+    Event(const EventInfo &info) noexcept;
 
-    const std::string &get_title() const noexcept { return title_; }
-    const time_point &get_time() const noexcept { return event_time_; }
+    const std::string &get_title() const noexcept;
+    const time_point &get_time() const noexcept;
 
 private:
-    std::string title_;
-    time_point event_time_;
+    EventInfo info_;
 };

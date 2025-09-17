@@ -1,47 +1,60 @@
 // event_adder.cpp
 #include "event_adder.h"
+#include "helpers.h"
 #include <iostream>
 
 bool add_event_flow(Manager &manager, Time &time)
 {
-    std::string title, str_time;
-    title = utils::get_string("Enter event title (or type 'cancel' to exit):");
-    if (title == "cancel")
+    EventInfo info;
+    std::string str_time;
+    info.title_ =
+        input_utils::get_string("\nEnter event Title (or type 'cancel' to exit): ");
+
+    if (info.title_ == "cancel")
     {
         std::cout << "Event creation cancelled.\n";
         return false;
     }
 
-    utils::help_menu();
+    if (manager.check_event_exist(info.title_))
+    {
+        std::cout << "Event with this title already exists!\n";
+        return false;
+    }
+
+    menu_utils::help_menu();
     while (true)
     {
-        // Mean: show menu
-        if (auto maybe_input = utils::parse_time_input(">");
-            maybe_input.has_value())
+        if (auto maybe_input = time_utils::parse_time_input(">");
+            (maybe_input.has_value()))
         {
-
             str_time = maybe_input.value();
         }
-        else
+        else // show help_menu
             continue;
 
         try
         {
-            time.time_format(str_time);
+            info.time_ = time.time_format(str_time);
+            break;
         }
         catch (const std::exception &e)
         {
             std::cout << "\nError: " << e.what() << "\n";
+            std::cout << "Please use format: YYYY-MM-DD HH:MM or type 'help'\n";
             continue;
         }
-
-        if (utils::confirm_time(time.tt))
-        {
-            manager.add_event(title, time.tp);
-            std::cout << "Success.\n";
-            return true;
-        }
-
-        std::cout << "Let's try again...\n\n";
     }
+
+    info.location_ =
+        input_utils::get_string("\nEnter event Location: ");
+
+    info.description_ =
+        input_utils::get_string("Enter event Description: ");
+
+    manager.add_event(info);
+    std::cout << "Success! "
+                 "(You can manage your event at any time)\n";
+
+    return true;
 }
