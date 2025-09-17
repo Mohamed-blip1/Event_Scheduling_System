@@ -7,11 +7,12 @@ void menu_utils::main_menu() noexcept
 
     std::cout << "\nMENU:\n";
     std::cout << "----------------\n";
-    std::cout << std::left << std::setw(MENU_INDENT) << "[1]" << " - Add event\n";
-    std::cout << std::left << std::setw(MENU_INDENT) << "[2]" << " - Custom your event (Soon!)\n";
-    std::cout << std::left << std::setw(MENU_INDENT) << "[3]" << " - Remove old events\n";
+    std::cout << std::left << std::setw(MENU_INDENT) << "[1]" << " - Add group\n";
+    std::cout << std::left << std::setw(MENU_INDENT) << "[2]" << " - Add event\n";
+    std::cout << std::left << std::setw(MENU_INDENT) << "[3]" << " - Custom your event (Soon!)\n";
     std::cout << std::left << std::setw(MENU_INDENT) << "[4]" << " - List events\n";
-    std::cout << std::left << std::setw(MENU_INDENT) << "[5]" << " - Menu\n";
+    std::cout << std::left << std::setw(MENU_INDENT) << "[5]" << " - Remove old events\n";
+    std::cout << std::left << std::setw(MENU_INDENT) << "[6]" << " - Menu\n";
     std::cout << std::left << std::setw(MENU_INDENT) << "[0]" << " - Exit\n";
     std::cout << "----------------\n";
 }

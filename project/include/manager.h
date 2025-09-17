@@ -1,8 +1,11 @@
 #pragma once
 // manager.h
 #include <unordered_map>
+#include <unordered_set>
+#include <algorithm>
 #include "helpers.h"
 #include "event.h"
+#include <vector>
 #include <set>
 
 constexpr size_t EXPECTED_EVENTS = 30;
@@ -18,15 +21,19 @@ public:
 public:
     Manager() noexcept;
 
+    bool add_group(const std::string &name) noexcept;
     bool add_event(const EventInfo &info) noexcept;
 
     unsigned short remove_old() noexcept;
 
     [[nodiscard]] bool check_event_exist(const std::string &title) const noexcept;
+    [[nodiscard]] bool check_group_exist(const std::string &name) const noexcept;
 
     bool list_events() const noexcept;
 
 private:
+    std::unordered_set<std::string> event_titles_;
     std::set<Event *, Compare> sorted_events_;
-    std::unordered_map<std::string, event_ptr> events_;
+    // I well switch to std::list later
+    std::unordered_map<std::string, std::vector<event_ptr>> events_;
 };

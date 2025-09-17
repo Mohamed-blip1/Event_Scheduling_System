@@ -6,17 +6,32 @@
 bool add_event_flow(Manager &manager, Time &time)
 {
     EventInfo info;
-    std::string str_time;
-    info.title_ =
-        input_utils::get_string("\nEnter event Title (or type 'cancel' to exit): ");
 
-    if (info.title_ == "cancel")
+    info.group_name_ =
+        input_utils::get_string("\nEnter group name(or type 'cancel' to exit): ");
+
+    if (info.group_name_ == "cancel")
     {
         std::cout << "Event creation cancelled.\n";
         return false;
     }
+    if (!manager.check_group_exist(info.group_name_))
+    {
+        std::cout << "Group doesn't exist!\n";
+        return false;
+    }
+
+    info.title_ =
+        input_utils::get_string("\nEnter event Title: ");
+
+    if (manager.check_event_exist(info.title_))
+    {
+        std::cout << "Event title already exist!\n";
+        return false;
+    }
 
     menu_utils::help_menu();
+    std::string str_time;
     while (true)
     {
         if (auto maybe_input = time_utils::parse_time_input(">");

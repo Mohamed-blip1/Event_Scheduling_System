@@ -8,3 +8,4 @@ Event::Event(const EventInfo &info) noexcept
 
 const std::string &Event::get_title() const noexcept { return info_.title_; }
 const time_point &Event::get_time() const noexcept { return info_.time_; }
+const std::string &Event::get_group_name() const noexcept { return info_.group_name_; }

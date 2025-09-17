@@ -9,6 +9,7 @@ struct EventInfo
 
     std::string title_;
     std::string location_;
+    std::string group_name_;
     std::string description_;
     system_clock::time_point time_;
 };
@@ -23,6 +24,7 @@ public:
 
     const std::string &get_title() const noexcept;
     const time_point &get_time() const noexcept;
+    const std::string &get_group_name() const noexcept;
 
 private:
     EventInfo info_;
