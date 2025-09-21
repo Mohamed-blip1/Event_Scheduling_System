@@ -31,6 +31,7 @@ bool Manager::check_event_exist(const std::string &title) const noexcept
 {
     return event_titles_.count(title) > 0;
 }
+
 bool Manager::check_group_exist(const std::string &name) const noexcept
 {
     return events_.count(name) > 0;
