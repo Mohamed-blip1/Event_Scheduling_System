@@ -1,15 +1,22 @@
 #pragma once
-// manager.h
+// manager.hpp
 #include <unordered_map>
 #include <unordered_set>
 #include <algorithm>
-#include "helpers.h"
-#include "event.h"
+#include "helpers.hpp"
+#include "my_event.hpp"
 #include <vector>
 #include <set>
 
 constexpr size_t EXPECTED_EVENTS = 30;
 constexpr unsigned short ZERO = 0;
+
+struct Compare
+{
+    using event_ptr = Event *;
+    bool operator()(const event_ptr &a_, const event_ptr &b_) const noexcept;
+};
+
 
 class Manager
 {

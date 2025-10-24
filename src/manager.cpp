@@ -1,5 +1,15 @@
 // manager.cpp
-#include "manager.h"
+#include "manager.hpp"
+
+bool Compare::operator()(const event_ptr &a_, const event_ptr &b_) const noexcept
+{
+    auto time1 = a_->get_time();
+    auto time2 = b_->get_time();
+    if (time1 != time2)
+        return time1 < time2;
+
+    return a_->get_title() < b_->get_title();
+}
 
 Manager::Manager() noexcept
 {
@@ -12,19 +22,20 @@ Manager::Manager() noexcept
     EventInfo info;
     NowTime time;
 
-    //    Debuging
-    //  using namespace std::chrono;
-    //  using day = std::chrono::duration<double, std::ratio<86400>>;
-    //  auto system_day = duration_cast<system_clock::duration>(day{1});
-    //  time.tp_ -= system_day * 4;
-    //  add_group("a");
-    //  for (size_t i = 0; i <= 6; ++i)
-    //  {
-    //      info.title_ = '1' + i;
-    //      info.group_name_ = "a";
-    //      info.time_ = (time.tp_ += system_day);
-    //      add_event(info);
-    //  }
+#ifdef DEBUG
+    using namespace std::chrono;
+    using day = std::chrono::duration<double, std::ratio<86400>>;
+    auto system_day = duration_cast<system_clock::duration>(day{1});
+    time.tp_ -= system_day * 4;
+    add_group("a");
+    for (size_t i = 0; i <= 6; ++i)
+    {
+        info.title_ = '1' + i;
+        info.group_name_ = "a";
+        info.time_ = (time.tp_ += system_day);
+        add_event(info);
+    }
+#endif
 }
 
 bool Manager::check_event_exist(const std::string &title) const noexcept

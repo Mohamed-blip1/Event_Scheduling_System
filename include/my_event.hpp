@@ -1,6 +1,6 @@
 #pragma once
-// event.h
-#include "utils.h"
+// my_event.hpp
+#include "utils.hpp"
 #include <chrono>
 
 struct EventInfo

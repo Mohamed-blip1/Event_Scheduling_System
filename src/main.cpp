@@ -1,5 +1,5 @@
 // main.cpp
-#include "event_adder.h"
+#include "event_adder.hpp"
 
 enum class Menu : size_t
 {
@@ -18,7 +18,6 @@ int main()
         << "\n=====Event Scheduling System=====\n";
     menu_utils::main_menu();
 
-    size_t choice;
     Manager manager;
     Time time;
     while (true)

@@ -1,6 +1,6 @@
 // event_adder.cpp
-#include "event_adder.h"
-#include "helpers.h"
+#include "event_adder.hpp"
+#include "helpers.hpp"
 #include <iostream>
 
 bool add_event_flow(Manager &manager, Time &time)
@@ -8,7 +8,7 @@ bool add_event_flow(Manager &manager, Time &time)
     EventInfo info;
 
     info.group_name_ =
-        input_utils::get_string("\nEnter group name(or type 'cancel' to exit): ");
+        input_utils::get_string("\nEnter group name([cancel] to exit): ");
 
     if (info.group_name_ == "cancel")
     {

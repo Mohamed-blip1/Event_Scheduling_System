@@ -6,6 +6,8 @@
 *.lo
 *.o
 *.obj
+build/
+private
 
 # Precompiled Headers
 *.gch
@@ -36,9 +38,11 @@
 *.exe
 *.out
 *.app
+main
 
 # debug information files
 *.dwo
 
 # Ignore all JSON files
 *.json
+*.vscode

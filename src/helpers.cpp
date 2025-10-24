@@ -1,5 +1,5 @@
 // helpers.cpp
-#include "helpers.h"
+#include "helpers.hpp"
 #include <vector>
 #include <iomanip>
 
@@ -38,12 +38,3 @@ void Time::clear() noexcept
     tm_ = std::tm{};
 }
 
-bool Compare::operator()(const event_ptr &a_, const event_ptr &b_) const noexcept
-{
-    auto time1 = a_->get_time();
-    auto time2 = b_->get_time();
-    if (time1 != time2)
-        return time1 < time2;
-
-    return a_->get_title() < b_->get_title();
-}

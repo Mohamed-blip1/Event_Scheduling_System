@@ -1,6 +1,6 @@
 #pragma once
-// helpers.h
-#include "event.h"
+// helpers.hpp
+#include "my_event.hpp"
 #include <sstream>
 #include <memory>
 
@@ -32,10 +32,4 @@ struct Time
     [[nodiscard]] time_point time_format(const std::string &st);
 
     void clear() noexcept;
-};
-
-struct Compare
-{
-    using event_ptr = Event *;
-    bool operator()(const event_ptr &a_, const event_ptr &b_) const noexcept;
 };
